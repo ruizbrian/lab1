@@ -286,7 +286,7 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Calculate the bounce rate based on the window size
-	float bounceRate = 1.0f - (float)g.xres / 400.0f; // Adjust 400.0f as needed
+	float bounceRate = 1.0f - (float)g.xres / 400.0f;
 
 	// Interpolate between red and blue based on bounce rate
 	float blue = 1.0f - bounceRate;
