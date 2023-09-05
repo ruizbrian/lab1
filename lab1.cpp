@@ -1,5 +1,5 @@
 // modified by: Brian Ruiz
-// date: August 30 
+// date: August 30
 //
 // author: Gordon Griesel
 // date: Spring 2022
@@ -283,18 +283,29 @@ void physics()
 
 void render()
 {
-
 	glClear(GL_COLOR_BUFFER_BIT);
-	// Draw box.
-	glPushMatrix();
-	glColor3f(0.0, 1.0, 0.0);
-	// glColor3ub(150, 160, 220);
-	glTranslatef(g.pos[1], g.pos[1], 0.0f);
-	glBegin(GL_QUADS);
-	glVertex2f(-g.w, -g.w);
-	glVertex2f(-g.w, g.w);
-	glVertex2f(g.w, g.w);
-	glVertex2f(g.w, -g.w);
-	glEnd();
-	glPopMatrix();
+
+	// Calculate the bounce rate based on the window size
+	float bounceRate = 1.0f - (float)g.xres / 400.0f; // Adjust 400.0f as needed
+
+	// Interpolate between red and blue based on bounce rate
+	float blue = 1.0f - bounceRate;
+	float red = bounceRate;
+
+	// Only draw the square if the window is larger than the square
+	if (g.xres >= 2 * g.w)
+	{
+		glPushMatrix();
+		glColor3f(red, 0.0, blue); // Set the color
+
+		glTranslatef(g.pos[0], g.pos[1], 0.0f);
+		glBegin(GL_QUADS);
+		glVertex2f(-g.w, -g.w);
+		glVertex2f(-g.w, g.w);
+		glVertex2f(g.w, g.w);
+		glVertex2f(g.w, -g.w);
+		glEnd();
+
+		glPopMatrix();
+	}
 }
